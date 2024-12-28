@@ -62,9 +62,8 @@ while True:
         if fingers[1] == 1 and fingers[2] == 1:
             # find distance between fingers
             length, frame, lineInfo = detector.findDistance(8,12, frame)
-            print(length)
             # click mouse if distance is short
-            if length < 24:
+            if length < 29:
                 cv2.circle(frame, (lineInfo[4],lineInfo[5]), 15, (0,255,0), cv2.FILLED)
                 pyautogui.click()  # perform mouse click
 
@@ -72,8 +71,11 @@ while True:
             pyautogui.hotkey('ctrl', 'v')
 
         if fingers[1] == 0 and fingers[2] == 0 and fingers[3] == 0 and fingers[4] == 0 and fingers[0] == 0:
-
             pyautogui.hotkey('ctrl', 'c')
+
+        if fingers[1] == 1 and fingers[2] == 1 and fingers[3] == 1 and fingers[4] == 0 and fingers[0] == 0:
+            pyautogui.rightClick()  # performs right click
+            
 
     fps = cap.get(cv2.CAP_PROP_FPS)
 
@@ -85,7 +87,7 @@ while True:
     cv2.imshow('Video', frame)
 
 
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cap.release()
